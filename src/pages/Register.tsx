@@ -1,9 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { zodResolver } from '@hookform/resolvers/zod';
+import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-const loginSchema = z.object({
+const registerSchema = z.object({
+  name: z.string()
+    .nonempty('Nome de usuário obrigatório')
+    .transform(name => {
+      return name.trim().split(' ').map(word => {
+        return word[0].toLocaleUpperCase().concat(word.substring(1));
+      }).join(' ');
+    }),
   email: z.string()
     .nonempty('Email é obrigatório')
     .email('Email inválido'),
@@ -12,23 +19,23 @@ const loginSchema = z.object({
     .min(6, 'Precisa ser no mínimo 6 caracteres'),
 });
 
-type loginFormData = z.infer<typeof loginSchema>;
+type registerFormData = z.infer<typeof registerSchema>;
 
-const Login = () => {
+const Register = () => {
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
-    formState: { errors }
-  } = useForm<loginFormData>({
-    resolver: zodResolver(loginSchema)
+    formState: { errors },
+  } = useForm<registerFormData>({
+    resolver: zodResolver(registerSchema)
   });
 
   const onClickFunction = (data: object) => {
     try {
-      localStorage.setItem('sucess_login', JSON.stringify(data));
-      navigate('/home');
+      localStorage.setItem('sucess_register', JSON.stringify(data));
+      navigate('/login');
     } catch (error) {
       console.log(error);
     }
@@ -45,10 +52,21 @@ const Login = () => {
         <div
           className="flex flex-col gap-1"
         >
+          <label htmlFor="name">Nome</label>
+          <input
+            className="text-black"
+            type="text"
+            {...register('name')}
+          />
+          {errors.name && <span>{errors.name.message}</span>}
+        </div>
+        <div
+          className="flex flex-col gap-1"
+        >
           <label htmlFor="email">Email</label>
           <input
-            type="text"
             className="text-black"
+            type="text"
             {...register('email')}
           />
           {errors.email && <span>{errors.email.message}</span>}
@@ -58,8 +76,8 @@ const Login = () => {
         >
           <label htmlFor="password">Senha</label>
           <input
-            type="password"
             className="text-black"
+            type="password"
             {...register('password')}
           />
           {errors.password && <span>{errors.password.message}</span>}
@@ -67,11 +85,11 @@ const Login = () => {
         <button
           type="submit"
         >
-          Entrar
+          Registrar
         </button>
       </form>
-    </main >
+    </main>
   );
 };
 
-export default Login;
+export default Register;
