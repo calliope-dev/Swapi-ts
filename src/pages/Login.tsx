@@ -15,7 +15,7 @@ const loginSchema = z.object({
 
 type loginFormData = z.infer<typeof loginSchema>;
 
-const Login: React.FC  = () => {
+const Login = () => {
   const navigate = useNavigate();
 
   const [output, setOutput] = useState(false);
