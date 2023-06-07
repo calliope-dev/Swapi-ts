@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -21,6 +22,8 @@ const registerSchema = z.object({
 type registerFormData = z.infer<typeof registerSchema>;
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -30,7 +33,12 @@ const Register = () => {
   });
 
   const onClickFunction = (data: object) => {
-    console.log(data);
+    try {
+      localStorage.setItem('sucess_register', JSON.stringify(data));
+      navigate('/login');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
