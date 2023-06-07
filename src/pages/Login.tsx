@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from "zod";
@@ -16,11 +17,13 @@ const loginSchema = z.object({
   password: z.string()
     .nonempty('Senha obrigatória')
     .min(6, 'Precisa ser no mínimo 6 caracteres'),
-})
+});
 
-type loginFormData = z.infer<typeof loginSchema>
+type loginFormData = z.infer<typeof loginSchema>;
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -30,9 +33,13 @@ const Login = () => {
   });
 
   const onClickFunction = (data: any) => {
-    localStorage.setItem('sucess_login', JSON.stringify(data));
-
-  }
+    try {
+      localStorage.setItem('sucess_login', JSON.stringify(data));
+      navigate('/home');
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   return (
     <main
@@ -83,7 +90,7 @@ const Login = () => {
         </button>
       </form>
     </main >
-  )
-}
+  );
+};
 
 export default Login;
