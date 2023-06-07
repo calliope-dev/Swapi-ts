@@ -1,7 +1,7 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 // Pages
-import Login from './pages/Login'
+import Login from './pages/Login';
 
 function App() {
   return (
