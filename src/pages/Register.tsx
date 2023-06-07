@@ -1,3 +1,23 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
+const registerSchema = z.object({
+  name: z.string()
+    .nonempty('Nome de usuário obrigatório')
+    .transform(name => {
+      return name.trim().split(' ').map(word => {
+        return word[0].toLocaleUpperCase().concat(word.substring(1));
+      }).join(' ');
+    }),
+  email: z.string()
+    .nonempty('Email é obrigatório')
+    .email('Email inválido'),
+  password: z.string()
+    .nonempty('Senha obrigatória')
+    .min(6, 'Precisa ser no mínimo 6 caracteres'),
+});
+
 const Register = () => {
   return (
     <main
