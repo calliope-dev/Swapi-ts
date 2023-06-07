@@ -8,7 +8,7 @@ const loginSchema = z.object({
     .nonempty('Nome de usuário obrigatório')
     .transform(name => {
       return name.trim().split(' ').map(word => {
-        return word[0].toLocaleUpperCase().concat(word.substring(1))
+        return word[0].toLocaleUpperCase().concat(word.substring(1));
       }).join(' ');
     }),
   email: z.string()
@@ -32,12 +32,12 @@ const Login = () => {
     resolver: zodResolver(loginSchema)
   });
 
-  const onClickFunction = (data: any) => {
+  const onClickFunction = (data: object) => {
     try {
       localStorage.setItem('sucess_login', JSON.stringify(data));
       navigate('/home');
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
