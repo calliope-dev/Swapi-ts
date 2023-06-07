@@ -4,16 +4,17 @@ import { z } from "zod";
 
 const loginSchema = z.object({
   name: z.string()
-  .nonempty('Nome de usuário obrigatório')
-  .transform(name => {
-    return name.trim().split(' ').map(word => {
-      return word[0].toLocaleUpperCase().concat(word.substring(1))
-    }).join(' ');
-  }),
+    .nonempty('Nome de usuário obrigatório')
+    .transform(name => {
+      return name.trim().split(' ').map(word => {
+        return word[0].toLocaleUpperCase().concat(word.substring(1))
+      }).join(' ');
+    }),
   email: z.string()
     .nonempty('Email é obrigatório')
     .email('Email inválido'),
   password: z.string()
+    .nonempty('Senha obrigatória')
     .min(6, 'Precisa ser no mínimo 6 caracteres'),
 })
 
@@ -27,9 +28,10 @@ const Login = () => {
   } = useForm<loginFormData>({
     resolver: zodResolver(loginSchema)
   });
-   
+
   const onClickFunction = (data: any) => {
-    console.log(data)
+    localStorage.setItem('sucess_login', JSON.stringify(data));
+
   }
 
   return (
@@ -71,6 +73,7 @@ const Login = () => {
             className="text-black"
             {...register('password')}
           />
+          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <button
           type="submit"
