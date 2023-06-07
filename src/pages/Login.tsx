@@ -1,15 +1,18 @@
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from "zod";
 
-// test
-
 const loginSchema = z.object({
-  name: z.string(),
+  name: z.string()
+  .nonempty('Nome de usuário obrigatório')
+  .transform(name => {
+    return name.trim().split(' ').map(word => {
+      return word[0].toLocaleUpperCase().concat(word.substring(1))
+    }).join(' ');
+  }),
   email: z.string()
     .nonempty('Email é obrigatório')
-    .email("Email inválido"),
+    .email('Email inválido'),
   password: z.string()
     .min(6, 'Precisa ser no mínimo 6 caracteres'),
 })
@@ -17,8 +20,6 @@ const loginSchema = z.object({
 type loginFormData = z.infer<typeof loginSchema>
 
 const Login = () => {
-  const [submitData, setData] = useState('');
-
   const {
     register,
     handleSubmit,
@@ -26,10 +27,10 @@ const Login = () => {
   } = useForm<loginFormData>({
     resolver: zodResolver(loginSchema)
   });
-
+   
   const onClickFunction = (data: any) => {
-    setData(JSON.stringify(data, null, 2))
-  };
+    console.log(data)
+  }
 
   return (
     <main
@@ -78,7 +79,6 @@ const Login = () => {
           Confirmar
         </button>
       </form>
-      <pre>{submitData}</pre>
     </main >
   )
 }
