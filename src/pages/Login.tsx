@@ -1,23 +1,28 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from "zod";
 
-// test
-
 const loginSchema = z.object({
-  name: z.string(),
+  name: z.string()
+    .nonempty('Nome de usuário obrigatório')
+    .transform(name => {
+      return name.trim().split(' ').map(word => {
+        return word[0].toLocaleUpperCase().concat(word.substring(1))
+      }).join(' ');
+    }),
   email: z.string()
     .nonempty('Email é obrigatório')
-    .email("Email inválido"),
+    .email('Email inválido'),
   password: z.string()
+    .nonempty('Senha obrigatória')
     .min(6, 'Precisa ser no mínimo 6 caracteres'),
-})
+});
 
-type loginFormData = z.infer<typeof loginSchema>
+type loginFormData = z.infer<typeof loginSchema>;
 
 const Login = () => {
-  const [submitData, setData] = useState('');
+  const navigate = useNavigate();
 
   const {
     register,
@@ -28,7 +33,12 @@ const Login = () => {
   });
 
   const onClickFunction = (data: any) => {
-    setData(JSON.stringify(data, null, 2))
+    try {
+      localStorage.setItem('sucess_login', JSON.stringify(data));
+      navigate('/home');
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
@@ -70,6 +80,7 @@ const Login = () => {
             className="text-black"
             {...register('password')}
           />
+          {errors.password && <span>{errors.password.message}</span>}
         </div>
         <button
           type="submit"
@@ -78,9 +89,8 @@ const Login = () => {
           Confirmar
         </button>
       </form>
-      <pre>{submitData}</pre>
     </main >
-  )
-}
+  );
+};
 
 export default Login;
