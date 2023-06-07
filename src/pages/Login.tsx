@@ -84,9 +84,8 @@ const Login = () => {
         </div>
         <button
           type="submit"
-          name="confirm-button"
         >
-          Confirmar
+          Entrar
         </button>
       </form>
     </main >
