@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -17,6 +18,8 @@ type loginFormData = z.infer<typeof loginSchema>;
 const Login = () => {
   const navigate = useNavigate();
 
+  const [output, setOutput] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -25,10 +28,19 @@ const Login = () => {
     resolver: zodResolver(loginSchema)
   });
 
-  const onClickFunction = (data: object) => {
+  const onClickFunction = ({ email, password }: { email: string, password: string }) => {
     try {
-      localStorage.setItem('sucess_login', JSON.stringify(data));
-      navigate('/home');
+      const userRegistered = JSON.parse(localStorage.getItem('sucess_register') || '{}');
+      if (userRegistered.email === email && userRegistered.password === password) {
+        localStorage.setItem('sucess_login', JSON.stringify({
+          name: userRegistered.name,
+          email,
+          password
+        }));
+        return navigate('/home');
+      }
+
+      return setOutput(true);
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +81,7 @@ const Login = () => {
         >
           Entrar
         </button>
+        {output && <span>Usuário não existe</span>}
       </form>
     </main >
   );
