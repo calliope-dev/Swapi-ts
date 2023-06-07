@@ -8,8 +8,8 @@ const Home = () => {
     try {
       const { name } = JSON.parse(localStorage.getItem('sucess_login') || '{}');
       setUserName(name);
-    } catch (errors) {
-      console.log(errors);
+    } catch (error) {
+      console.log(error);
     }
   }, []);
 
