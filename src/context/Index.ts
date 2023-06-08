@@ -1,9 +1,7 @@
-import React, { createContext } from "react";
+import { createContext } from "react";
 
-interface IContext {
-    starWarsPlanets: never[],
-    setPlanets: React.Dispatch<React.SetStateAction<never[]>>
-}
+// Interfaces
+import { IContext } from "../interfaces/IContext";
 
 const AppContext = createContext<IContext | null>(null);
 

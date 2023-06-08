@@ -1,7 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CFooter, CHeader } from "../components/Index";
 
+// Context
+import AppContext from "../context/Index";
+
+// Interface
+import { IPlanet } from "../interfaces/IPlanet";
+
 const Home = () => {
+  const context = useContext(AppContext);
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
@@ -19,7 +26,19 @@ const Home = () => {
       <main
         className="h-screen"
       >
-        Homepage
+        {
+          context?.starWarsPlanets.map((index: IPlanet) => {
+            return (
+              <article
+                key={index.name}
+              >
+                <div>
+                  <span>{index.name}</span>
+                </div>
+              </article>
+            );
+          })
+        }
       </main>
       <CFooter />
     </>
