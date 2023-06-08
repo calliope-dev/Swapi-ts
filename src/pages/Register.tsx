@@ -21,7 +21,7 @@ const registerSchema = z.object({
 
 type registerFormData = z.infer<typeof registerSchema>;
 
-const Register: React.FC  = () => {
+const Register = () => {
   const navigate = useNavigate();
 
   const {
