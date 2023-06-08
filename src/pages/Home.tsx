@@ -21,27 +21,29 @@ const Home = () => {
   }, []);
 
   return (
-    <>
-      <CHeader userName={userName} />
-      <main
-        className="h-screen"
-      >
-        {
-          context?.starWarsPlanets.map((index: IPlanet) => {
-            return (
-              <article
-                key={index.name}
-              >
-                <div>
-                  <span>{index.name}</span>
-                </div>
-              </article>
-            );
-          })
-        }
-      </main>
-      <CFooter />
-    </>
+    context?.isLoading ? (<span>Loading...</span>) : (
+      <div>
+        <CHeader userName={userName} />
+        <main
+          className="h-screen"
+        >
+          {
+            context?.starWarsPlanets.map((index: IPlanet) => {
+              return (
+                <article
+                  key={index.name}
+                >
+                  <div>
+                    <span>{index.name}</span>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </main>
+        <CFooter />
+      </div>
+    )
   );
 };
 
