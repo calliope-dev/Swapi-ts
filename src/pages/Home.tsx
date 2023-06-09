@@ -52,6 +52,8 @@ const Home = () => {
           <input
             type="text"
             name="search-input"
+            className="shadow border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            placeholder="Search"
             onChange={onChangeFunction}
           />
           <table>
