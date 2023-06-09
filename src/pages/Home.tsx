@@ -9,7 +9,10 @@ import { IPlanet } from "../interfaces/IPlanet";
 
 const Home = () => {
   const context = useContext(AppContext);
+
   const [userName, setUserName] = useState('');
+
+  const [searchByName, setBySearch] = useState([]);
 
   useEffect(() => {
     try {
@@ -20,6 +23,25 @@ const Home = () => {
     }
   }, []);
 
+  const onChangeFunction = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { target: { value, name } } = event;
+    let newArr;
+
+    switch (name) {
+      case 'search-input':
+        newArr = context?.starWarsPlanets.filter((i: IPlanet) => {
+          const planetNameLowerCase = i.name.toLowerCase();
+          const valueLowerCase = value.toLowerCase().substring(0, 2);
+
+          return planetNameLowerCase.substring(0, 2).includes(valueLowerCase);
+        });
+        setBySearch(newArr as never);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     context?.isLoading ? (<span>Loading...</span>) : (
       <div>
@@ -27,8 +49,42 @@ const Home = () => {
         <main
           className="h-screen"
         >
+          <input
+            type="text"
+            name="search-input"
+            onChange={onChangeFunction}
+          />
           {
-            context?.starWarsPlanets.map((index: IPlanet) => {
+            searchByName.length >= 1 ? (searchByName.map((index: IPlanet) => {
+              return (
+                <article
+                  key={index.name}
+                >
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Nome:</th>
+                        <th>Rotation Period:</th>
+                        <th>Orbital Period:</th>
+                        <th>Climate:</th>
+                        <th>Population:</th>
+                        <th>Diameter:</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{index.name}</td>
+                        <td>{index.rotation_period}</td>
+                        <td>{index.orbital_period}</td>
+                        <td>{index.climate}</td>
+                        <td>{index.population}</td>
+                        <td>{index.diameter}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </article>
+              );
+            })) : (context?.starWarsPlanets.map((index: IPlanet) => {
               return (
                 <article
                   key={index.name}
@@ -58,7 +114,7 @@ const Home = () => {
                 </article>
               );
             })
-          }
+            )}
         </main>
         <CFooter />
       </div>
