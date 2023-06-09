@@ -33,9 +33,14 @@ const Home = () => {
                 <article
                   key={index.name}
                 >
-                  <div>
-                    <span>{index.name}</span>
-                  </div>
+                  <table>
+                    <tr>
+                      <th>Name:</th>
+                    </tr>
+                    <tr>
+                      <td>{index.name}</td>
+                    </tr>
+                  </table>
                 </article>
               );
             })
