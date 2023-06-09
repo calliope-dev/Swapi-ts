@@ -1,5 +1,7 @@
 # Z-0x001
 
+### Em desenvolvimento ⚠️
+
 O Z-0x001 é um projeto desenvolvido em TypeScript e React que permite aos usuários se registrar, fazer login e visualizar planetas da saga Star Wars por meio de uma integração com uma API. A aplicação também oferece funcionalidades de filtragem dos planetas.
 
 ## Funcionalidades
