@@ -54,70 +54,54 @@ const Home = () => {
             name="search-input"
             onChange={onChangeFunction}
           />
-          {
-            searchByName.length >= 1 ? (searchByName.map((index: IPlanet) => {
-              return (
-                <article
-                  key={index.name}
-                >
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Nome:</th>
-                        <th>Rotation Period:</th>
-                        <th>Orbital Period:</th>
-                        <th>Climate:</th>
-                        <th>Population:</th>
-                        <th>Diameter:</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>{index.name}</td>
-                        <td>{index.rotation_period}</td>
-                        <td>{index.orbital_period}</td>
-                        <td>{index.climate}</td>
-                        <td>{index.population}</td>
-                        <td>{index.diameter}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </article>
-              );
-            })) : (context?.starWarsPlanets.map((index: IPlanet) => {
-              return (
-                <article
-                  key={index.name}
-                >
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Nome:</th>
-                        <th>Rotation Period:</th>
-                        <th>Orbital Period:</th>
-                        <th>Climate:</th>
-                        <th>Population:</th>
-                        <th>Diameter:</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>{index.name}</td>
-                        <td>{index.rotation_period}</td>
-                        <td>{index.orbital_period}</td>
-                        <td>{index.climate}</td>
-                        <td>{index.population}</td>
-                        <td>{index.diameter}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </article>
-              );
-            })
-            )}
+          <table>
+            <thead>
+              <tr>
+                <th>Nome:</th>
+                <th>Rotation Period:</th>
+                <th>Orbital Period:</th>
+                <th>Climate:</th>
+                <th>Population:</th>
+                <th>Diameter:</th>
+              </tr>
+            </thead>
+            {
+              searchByName.length >= 1 ? (searchByName.map((index: IPlanet) => {
+                return (
+                  <tbody
+                    key={index.name}
+                  >
+                    <tr>
+                      <td>{index.name}</td>
+                      <td>{index.rotation_period}</td>
+                      <td>{index.orbital_period}</td>
+                      <td>{index.climate}</td>
+                      <td>{index.population}</td>
+                      <td>{index.diameter}</td>
+                    </tr>
+                  </tbody>
+                );
+              })) : (context?.starWarsPlanets.map((index: IPlanet) => {
+                return (
+                  <tbody
+                    key={index.name}
+                  >
+                    <tr>
+                      <td>{index.name}</td>
+                      <td>{index.rotation_period}</td>
+                      <td>{index.orbital_period}</td>
+                      <td>{index.climate}</td>
+                      <td>{index.population}</td>
+                      <td>{index.diameter}</td>
+                    </tr>
+                  </tbody>
+                );
+              })
+              )}
+          </table>
         </main>
         <CFooter />
-      </div>
+      </div >
     )
   );
 };
