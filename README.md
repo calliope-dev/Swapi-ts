@@ -1,8 +1,6 @@
-# Z-0x001
+# Projeto SWAPI
 
-### Em desenvolvimento ⚠️
-
-O Z-0x001 é um projeto desenvolvido em TypeScript e React que permite aos usuários se registrar, fazer login e visualizar planetas da saga Star Wars por meio de uma integração com uma API. A aplicação também oferece funcionalidades de filtragem dos planetas.
+O SWAPI é um projeto desenvolvido em TypeScript e React que permite aos usuários se registrar, fazer login e visualizar planetas da saga Star Wars por meio de uma integração com uma API. A aplicação também oferece funcionalidades de filtragem dos planetas.
 
 ## Funcionalidades
 
@@ -11,7 +9,7 @@ O projeto possui as seguintes funcionalidades:
 - Registro e Login: Os usuários podem se registrar e fazer login na aplicação para acessar as funcionalidades.
 - Integração com API de Star Wars: A aplicação faz requisições a uma API de Star Wars para obter informações sobre os planetas.
 - Visualização de Planetas: Os usuários podem visualizar os planetas da saga Star Wars na aplicação.
-- Filtros: A aplicação oferece opções de filtragem para os planetas, permitindo que os usuários encontrem planetas específicos com base em critérios como nome, período de rotação, período orbital, população, gravidade e terreno.
+- Filtros: A aplicação oferece opção de filtragem por nome do planeta.
 
 ## Dependências
 
@@ -76,3 +74,7 @@ O projeto possui os seguintes scripts:
 4. Execute o comando `npm run dev` ou `yarn dev` para iniciar o servidor de desenvolvimento.
 5. Acesse a aplicação em seu navegador através do endereço fornecido pelo servidor de desenvolvimento.
 
+
+## Api
+
+- https://swapi.dev/
