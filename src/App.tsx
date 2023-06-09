@@ -6,7 +6,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 
 // Hooks
-import ScrollToTop from './hooks/useScrollToTop';
+import ScrollToTop from './hooks/ScrollToTop';
 
 function App() {
   return (
