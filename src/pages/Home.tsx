@@ -34,22 +34,26 @@ const Home = () => {
                   key={index.name}
                 >
                   <table>
-                    <tr>
-                      <th>Nome:</th>
-                      <th>Rotation Period:</th>
-                      <th>Orbital Period:</th>
-                      <th>Climate:</th>
-                      <th>Population:</th>
-                      <th>Diameter:</th>
-                    </tr>
-                    <tr>
-                      <td>{index.name}</td>
-                      <td>{index.rotation_period}</td>
-                      <td>{index.orbital_period}</td>
-                      <td>{index.climate}</td>
-                      <td>{index.population}</td>
-                      <td>{index.diameter}</td>
-                    </tr>
+                    <thead>
+                      <tr>
+                        <th>Nome:</th>
+                        <th>Rotation Period:</th>
+                        <th>Orbital Period:</th>
+                        <th>Climate:</th>
+                        <th>Population:</th>
+                        <th>Diameter:</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{index.name}</td>
+                        <td>{index.rotation_period}</td>
+                        <td>{index.orbital_period}</td>
+                        <td>{index.climate}</td>
+                        <td>{index.population}</td>
+                        <td>{index.diameter}</td>
+                      </tr>
+                    </tbody>
                   </table>
                 </article>
               );
