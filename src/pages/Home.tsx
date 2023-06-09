@@ -66,33 +66,33 @@ const Home = () => {
               </tr>
             </thead>
             {
-              searchByName.length >= 1 ? (searchByName.map((index: IPlanet) => {
+              searchByName.length >= 1 ? (searchByName.map((p: IPlanet, index: number) => {
                 return (
                   <tbody
-                    key={index.name}
+                    key={index}
                   >
                     <tr>
-                      <td>{index.name}</td>
-                      <td>{index.rotation_period}</td>
-                      <td>{index.orbital_period}</td>
-                      <td>{index.climate}</td>
-                      <td>{index.population}</td>
-                      <td>{index.diameter}</td>
+                      <td>{p.name}</td>
+                      <td>{p.rotation_period}</td>
+                      <td>{p.orbital_period}</td>
+                      <td>{p.climate}</td>
+                      <td>{p.population}</td>
+                      <td>{p.diameter}</td>
                     </tr>
                   </tbody>
                 );
-              })) : (context?.starWarsPlanets.map((index: IPlanet) => {
+              })) : (context?.starWarsPlanets.map((p: IPlanet, index: number) => {
                 return (
                   <tbody
-                    key={index.name}
+                    key={index}
                   >
                     <tr>
-                      <td>{index.name}</td>
-                      <td>{index.rotation_period}</td>
-                      <td>{index.orbital_period}</td>
-                      <td>{index.climate}</td>
-                      <td>{index.population}</td>
-                      <td>{index.diameter}</td>
+                      <td>{p.name}</td>
+                      <td>{p.rotation_period}</td>
+                      <td>{p.orbital_period}</td>
+                      <td>{p.climate}</td>
+                      <td>{p.population}</td>
+                      <td>{p.diameter}</td>
                     </tr>
                   </tbody>
                 );
